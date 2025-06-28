@@ -97,7 +97,7 @@
         z-index: 3999;
         transform: translateX(-100%);
         transition: transform 0.28s cubic-bezier(.4,1.3,.5,1);
-        padding-top: 32px;
+        padding-top: 64px;
         border-top-right-radius: 24px;
         border-bottom-right-radius: 24px;
       }
@@ -235,6 +235,7 @@
 .carrito-texto {
   font-weight: 600;
   letter-spacing: 0.5px;
+  color: #ffffff;
 }
 .carrito-contador {
   background: #fff;
@@ -932,6 +933,11 @@
     mensaje.style.display = 'none';
     var btnVolver = document.getElementById('btn-volver-inicio');
     if (btnVolver) btnVolver.remove();
+    // Cerrar menú móvil si está abierto
+    var menuMovil = document.getElementById('menu-lateral-movil');
+    if(menuMovil && menuMovil.classList.contains('abierto')) {
+      menuMovil.classList.remove('abierto');
+    }
   }
   // Hacer funcional el enlace de WhatsApp en el menú de escritorio
   setTimeout(function() {
