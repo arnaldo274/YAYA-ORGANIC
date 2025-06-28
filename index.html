@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAYA ORGANIC</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    /* ...otros estilos... */
+    .carrito-modal {
+        /* ...otros estilos... */
+        transition: opacity 0.4s ease;
+        opacity: 1;
+    }
+    .carrito-modal.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+    /* Mostrar menú inferior solo en móvil/tablet */
+    @media (max-width: 768px) {
+        .nav-principal, .nav-inferior, .nav-superior-movil { display: none !important; }
+        .menu-hamburguesa {
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 44px;
+            background: #fff;
+            box-shadow: 0 2px 12px #0002;
+            z-index: 2000;
+            padding: 0 10px;
+        }
+        .menu-hamburguesa button {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #FF5733;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .menu-hamburguesa .logo-mini {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #FF5733;
+            flex: 1;
+            text-align: left;
+        }
+        .menu-movil-desplegable {
+            display: none;
+            position: fixed;
+            top: 44px; left: 0;
+            width: 100vw;
+            background: #fff;
+            box-shadow: 0 2px 12px #0002;
+            z-index: 2100;
+            flex-direction: column;
+            padding: 0;
+            animation: fadeInMenu 0.22s;
+        }
+        .menu-movil-desplegable.open {
+            display: flex;
+        }
+        .menu-movil-desplegable ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .menu-movil-desplegable li {
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        .menu-movil-desplegable a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.18s, color 0.18s;
+        }
+        .menu-movil-desplegable a span {
+            font-size: 1.2em;
+        }
+        .menu-movil-desplegable a:active, .menu-movil-desplegable a:focus, .menu-movil-desplegable a:hover {
+            background: #FF5733;
+            color: #fff;
+        }
+        .menu-movil-desplegable .categorias-dropdown,
+        .menu-movil-desplegable .contacto-dropdown {
+            display: none;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: 0 2px 12px #0002;
+            border-radius: 0 0 10px 10px;
+            position: static;
+            padding: 0 0 0 24px;
+        }
+        .menu-movil-desplegable .categorias-dropdown.open,
+        .menu-movil-desplegable .contacto-dropdown.open {
+            display: flex;
+        }
+        .menu-movil-desplegable .categorias-dropdown a,
+        .menu-movil-desplegable .contacto-dropdown a {
+            padding: 10px 0;
+            font-size: 0.98rem;
+            color: #333;
+            border-radius: 0;
+        }
+        .menu-movil-desplegable .categorias-dropdown a:hover,
+        .menu-movil-desplegable .contacto-dropdown a:hover {
+            background: #FF5733;
+            color: #fff;
+        }
+        body { padding-top: 44px !important; }
+    }
+    @media (min-width: 769px) {
+        .nav-superior-movil { display: none !important; }
+        .nav-principal { display: block !important; }
+        body { padding-top: 0 !important; }
+    }
+    .producto-botones {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+        justify-content: center;
+    }
+    .notificacion-carrito {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        z-index: 3000;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    .notificacion-carrito.mostrar {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>YAYA ORGANIC</h1>
+        </div>
+        <nav class="nav-principal">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Categorías</a>
+                    <div class="dropdown-content">
+                        <a href="#">Jabones</a>
+                        <a href="#">Aceites</a>
+                        <a href="#">Shampoo</a>
+                        <a href="#">Goteros</a>
+                        <a href="#">Cremas</a>
+                        <a href="#">Exfoliantes</a>
+                        <a href="#">Todos</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" id="btn-contacto">Contacto</a>
+                    <div class="dropdown-content">
+                        <a href="#" id="contacto-whatsapp">WhatsApp</a>
+                        <a href="#" id="contacto-instagram">Instagram</a>
+                    </div>
+                </li>
+                <li><a href="#login">Iniciar Sesión</a></li>
+                <li><a href="#registro">Registrarse</a></li>
+            </ul>
+        </nav>
+        <div id="carrito">
+            <button onclick="mostrarCarrito()">
+                Carrito (<span id="cantidad-carrito">0</span> productos)
+            </button>
+        </div>
+    </header>
+
+    <section id="presentacion">
+        <div class="presentacion-contenido">
+            <h2>Bienvenidos a YAYA ORGANIC</h2>
+            <p>Explora nuestra gama de productos naturales para el cuidado personal.</p>
+        </div>
+    </section>
+
+    <section id="inicio">
+        <h2>Nuestros Productos</h2>
+        <div class="productos-lista">
+            <!-- Producto 1 -->
+            <div class="producto-card" data-categoria="jabones" data-nombre="Jabón Natural" data-descripcion="Jabón artesanal natural, ideal para todo tipo de piel. Hidratante y suave." data-resumen="Un jabón natural hecho a mano, perfecto para el uso diario y todo tipo de piel.">
+                <img src="https://via.placeholder.com/300x200?text=Jabón+Natural" alt="Jabón Natural">
+                <h3>Jabón Natural</h3>
+                <p>RD$15.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Jabón Natural', precio: 15 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto-card" data-categoria="jabones" data-nombre="Jabón Natural" data-descripcion="Jabón artesanal natural, ideal para todo tipo de piel. Hidratante y suave." data-resumen="Un jabón natural hecho a mano, perfecto para el uso diario y todo tipo de piel.">
+                <img src="https://via.placeholder.com/300x200?text=Jabón+Natural" alt="Jabón Natural">
+                <h3>Jabón Natural</h3>
+                <p>RD$15.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Jabón Natural', precio: 15 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+            
+            <!-- Producto 3 -->
+            <div class="producto-card" data-categoria="aceites" data-nombre="Aceite Esencial" data-descripcion="Aceite esencial puro, perfecto para masajes y aromaterapia. Relajante y natural." data-resumen="Aceite esencial puro para masajes, aromaterapia y relajación natural.">
+                <img src="https://via.placeholder.com/300x200?text=Aceite+Esencial" alt="Aceite Esencial">
+                <h3>Aceite Esencial</h3>
+                <p>RD$25.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Aceite Esencial', precio: 25 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 4 (duplicado) -->
+            <div class="producto-card" data-categoria="aceites" data-nombre="Aceite Esencial" data-descripcion="Aceite esencial puro, perfecto para masajes y aromaterapia. Relajante y natural." data-resumen="Aceite esencial puro para masajes, aromaterapia y relajación natural.">
+                <img src="https://via.placeholder.com/300x200?text=Aceite+Esencial" alt="Aceite Esencial">
+                <h3>Aceite Esencial</h3>
+                <p>RD$25.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Aceite Esencial', precio: 25 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+            
+            <!-- Producto 5 -->
+            <div class="producto-card" data-categoria="shampoo" data-nombre="Shampoo Natural" data-descripcion="Shampoo natural sin sulfatos, fortalece y da brillo al cabello." data-resumen="Shampoo sin sulfatos que fortalece y da brillo al cabello de forma natural.">
+                <img src="https://via.placeholder.com/300x200?text=Shampoo+Natural" alt="Shampoo Natural">
+                <h3>Shampoo Natural</h3>
+                <p>RD$500.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Shampoo Natural', precio: 20 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="producto-card" data-categoria="jabones" data-nombre="Jabón de Lavanda" data-descripcion="Jabón de lavanda relajante, ayuda a calmar la piel y el ánimo." data-resumen="Jabón relajante con aroma a lavanda, ideal para calmar la piel y el ánimo.">
+                <img src="https://via.placeholder.com/300x200?text=Jabón+de+Lavanda" alt="Jabón de Lavanda">
+                <h3>Jabón de Lavanda</h3>
+                <p>$18.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Jabón de Lavanda', precio: 18 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="producto-card" data-categoria="cremas" data-nombre="Crema Hidratante" data-descripcion="Crema hidratante con ingredientes naturales, ideal para piel seca." data-resumen="Crema hidratante natural, perfecta para piel seca y sensible.">
+                <img src="https://via.placeholder.com/300x200?text=Crema+Hidratante" alt="Crema Hidratante">
+                <h3>Crema Hidratante</h3>
+                <p>$22.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Crema Hidratante', precio: 22 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="producto-card" data-categoria="aceites" data-nombre="Aceite de Argán" data-descripcion="Aceite de argán puro, nutre y repara el cabello y la piel." data-resumen="Aceite de argán puro para nutrir y reparar cabello y piel.">
+                <img src="https://via.placeholder.com/300x200?text=Aceite+de+Argán" alt="Aceite de Argán">
+                <h3>Aceite de Argán</h3>
+                <p>RD$30.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Aceite de Argán', precio: 30 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 9 -->
+            <div class="producto-card" data-categoria="exfoliantes" data-nombre="Exfoliante Natural" data-descripcion="Exfoliante natural suave, elimina impurezas y deja la piel radiante." data-resumen="Exfoliante suave que elimina impurezas y deja la piel radiante.">
+                <img src="https://via.placeholder.com/300x200?text=Exfoliante+Natural" alt="Exfoliante Natural">
+                <h3>Exfoliante Natural</h3>
+                <p>RD$17.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Exfoliante Natural', precio: 17 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 10 -->
+            <div class="producto-card" data-categoria="jabones" data-nombre="Jabón de Rosa Mosqueta" data-descripcion="Jabón de rosa mosqueta, regenera y suaviza la piel." data-resumen="Jabón de rosa mosqueta que regenera y suaviza la piel.">
+                <img src="https://via.placeholder.com/300x200?text=Jabón+de+Rosa+Mosqueta" alt="Jabón de Rosa Mosqueta">
+                <h3>Jabón de Rosa Mosqueta</h3>
+                <p>$19.00</p>
+                <div class="producto-botones">
+                    <button onclick="agregarAlCarrito({ nombre: 'Jabón de Rosa Mosqueta', precio: 19 })">Agregar al Carrito</button>
+                    <button class="btn-detalles">Detalles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="registro" style="display:none;">
+        <h2>Registrarse</h2>
+        <form id="form-registro">
+            <input type="text" placeholder="Nombre" name="nombre" required>
+            <input type="text" placeholder="Apellido" name="apellido" required>
+            <input type="tel" placeholder="Teléfono" name="telefono" required>
+            <input type="text" placeholder="Dirección" name="direccion" required>
+            <input type="email" placeholder="Correo Electrónico" name="correo" required>
+            <input type="password" placeholder="Contraseña" name="password" required>
+            <button type="submit">Registrar</button>
+        </form>
+    </section>
+
+    <section id="login" style="display:none;">
+        <h2>Iniciar Sesión</h2>
+        <form id="form-login">
+            <input type="email" placeholder="Correo Electrónico" name="correo" required>
+            <input type="password" placeholder="Contraseña" name="password" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </section>
+
+    <script>
+    var btnRegistro = document.querySelector('a[href="#registro"]');
+    if(btnRegistro) {
+        btnRegistro.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('registro').style.display = 'block';
+        });
+    }
+    var btnLogin = document.querySelector('a[href="#login"]');
+    if(btnLogin) {
+        btnLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('login').style.display = 'block';
+        });
+    }
+    var btnInicio = document.querySelector('a[href="#inicio"]');
+    if(btnInicio) {
+        btnInicio.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('presentacion').style.display = 'block';
+            document.getElementById('inicio').style.display = 'block';
+            filtrarProductos('todos'); // Siempre mostrar todos los productos al volver al inicio
+        });
+    }
+    function mostrarCarrito() {
+        var modal = document.getElementById('carrito-modal');
+        var contenido = document.querySelector('.carrito-contenido');
+        // Restaurar el contenido original del modal
+        contenido.innerHTML = `
+            <h2>Carrito de Compras</h2>
+            <ul id="carrito-lista"></ul>
+            <div id="carrito-total" style="font-weight:bold; color:#FF5733; margin-bottom:10px;"></div>
+            <button id="carrito-pago" style="display:none; background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Realizar pago</button>
+            <button id="carrito-cerrar" style="background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Cerrar</button>
+        `;
+        modal.style.display = 'flex';
+        modal.classList.remove('fade-out');
+        mostrarArticulosCarrito();
+        asignarEventoCerrarCarrito();
+    }
+    var btnCarrito = document.querySelector('#carrito button');
+    if(btnCarrito) {
+        btnCarrito.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarCarrito();
+        });
+    }
+    var btnCarritoInferior = document.getElementById('carrito-inferior');
+    if(btnCarritoInferior) {
+        btnCarritoInferior.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarCarrito();
+        });
+    }
+    // Carrito funcionalidad básica
+    var carrito = [];
+    function agregarAlCarrito(producto) {
+        carrito.push(producto);
+        actualizarCarrito();
+        mostrarNotificacionCarrito();
+    }
+    function eliminarDelCarrito(index) {
+        carrito.splice(index, 1);
+        actualizarCarrito();
+    }
+    function actualizarCarrito() {
+        document.getElementById('cantidad-carrito').textContent = carrito.length;
+        mostrarArticulosCarrito();
+    }
+    function mostrarArticulosCarrito() {
+        var lista = document.getElementById('carrito-lista');
+        lista.innerHTML = '';
+        var total = 0;
+        if(carrito.length === 0) {
+            lista.innerHTML = '<li>El carrito está vacío.</li>';
+            document.getElementById('carrito-total').textContent = '';
+            document.getElementById('carrito-pago').style.display = 'none';
+        } else {
+            carrito.forEach(function(item, i) {
+                var li = document.createElement('li');
+                li.innerHTML = item.nombre + ' - $' + item.precio + ' <button onclick="eliminarDelCarrito(' + i + ')">Eliminar</button>';
+                lista.appendChild(li);
+                total += Number(item.precio);
+            });
+            document.getElementById('carrito-total').textContent = 'Total: $' + total.toFixed(2);
+            document.getElementById('carrito-pago').style.display = 'block';
+        }
+    }
+    // Filtrar productos por categoría
+    function filtrarProductos(categoria) {
+        document.querySelectorAll('.producto-card').forEach(function(card) {
+            if (categoria === 'todos') {
+                card.style.display = 'block';
+            } else {
+                var cat = card.getAttribute('data-categoria');
+                card.style.display = (cat === categoria) ? 'block' : 'none';
+            }
+        });
+    }
+    // Asignar eventos a las categorías (menú superior e inferior)
+    document.querySelectorAll('.dropdown-content a, .categorias-dropdown a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var categoria = this.textContent.trim().toLowerCase();
+            if (categoria === 'jabones') filtrarProductos('jabones');
+            else if (categoria === 'shampoo') filtrarProductos('shampoo');
+            else if (categoria === 'aceites') filtrarProductos('aceites');
+            else if (categoria === 'exfoliantes') filtrarProductos('exfoliantes');
+            else if (categoria === 'cremas') filtrarProductos('cremas');
+            else if (categoria === 'goteros') filtrarProductos('goteros');
+            else if (categoria === 'todos') filtrarProductos('todos');
+            else filtrarProductos('todos');
+            // Mostrar solo la sección de productos
+            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('presentacion').style.display = 'block';
+            document.getElementById('inicio').style.display = 'block';
+        });
+    });
+    // Menú inferior móvil: mostrar/ocultar categorías
+    document.querySelectorAll('.categorias-toggle').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+            var drop = btn.querySelector('.categorias-dropdown');
+            if(drop) drop.classList.toggle('open');
+            // Cerrar otros dropdowns
+            document.querySelectorAll('.categorias-dropdown').forEach(function(dd){
+                if(dd !== drop) dd.classList.remove('open');
+            });
+        });
+    });
+    // Menú inferior móvil: mostrar/ocultar contacto
+    var btnContactoInferior = document.querySelector('.contacto-toggle');
+    if(btnContactoInferior) {
+        btnContactoInferior.addEventListener('click', function(e) {
+            e.preventDefault();
+            var drop = btnContactoInferior.nextElementSibling;
+            if(drop) drop.classList.toggle('open');
+            // Cerrar otros dropdowns
+            document.querySelectorAll('.contacto-dropdown').forEach(function(dd){
+                if(dd !== drop) dd.classList.remove('open');
+            });
+        });
+    }
+    // Cerrar el submenú de contacto inferior al hacer clic fuera
+    window.addEventListener('click', function(e) {
+        var btnContactoInferior = document.querySelector('.contacto-toggle');
+        var drop = btnContactoInferior ? btnContactoInferior.nextElementSibling : null;
+        if(drop && !drop.contains(e.target) && e.target !== btnContactoInferior) {
+            drop.classList.remove('open');
+        }
+    });
+    function cerrarCarrito() {
+        var modal = document.getElementById('carrito-modal');
+        modal.classList.add('fade-out');
+        setTimeout(function() {
+            modal.style.display = 'none';
+            modal.classList.remove('fade-out');
+        }, 400);
+    }
+    function mostrarFormularioPago() {
+        var modal = document.getElementById('carrito-modal');
+        var contenido = document.querySelector('.carrito-contenido');
+        contenido.innerHTML = `
+            <h2>Transferencia Bancaria</h2>
+            <ul style="text-align:left; margin-bottom:15px;">
+                <li><b>Banco Popular Ahorro</b>  825900525 Yandry Martinez</li>
+                <li><b>Banco BHD Ahorro</b>  35431370010 Yandry Martinez</li>
+            </ul>
+            <label style="font-weight:bold;">Adjunta tu baucher de transferencia:</label><br>
+            <input type="file" id="baucher-input" accept="image/*" style="margin:10px 0 20px 0;"><br>
+            <button id="enviar-whatsapp" style="background:#25D366; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px 10px 0 0; display:inline-block;">Enviar por WhatsApp</button>
+            <button id="volver-carrito" style="background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px 0 0 0; display:inline-block;">Volver</button>
+        `;
+        // Evento para volver al carrito
+        document.getElementById('volver-carrito').onclick = function() {
+            // Restaurar el contenido original del carrito
+            mostrarCarrito();
+        };
+        // Evento para enviar por WhatsApp
+        document.getElementById('enviar-whatsapp').onclick = function() {
+            var input = document.getElementById('baucher-input');
+            var mensaje = encodeURIComponent('Hola, adjunto mi baucher de transferencia para la compra en YAYA ORGANIC.');
+            var numero = '18093948697'; // Cambia por el número real
+            var url = 'https://wa.me/' + numero + '?text=' + mensaje;
+            window.open(url, '_blank');
+            alert('Recuerda adjuntar la imagen del baucher en el chat de WhatsApp.');
+        };
+    }
+    function asignarEventoCerrarCarrito() {
+        var btnCerrarCarrito = document.getElementById('carrito-cerrar');
+        if(btnCerrarCarrito) {
+            btnCerrarCarrito.onclick = function() {
+                cerrarCarrito();
+            };
+        }
+        var btnPago = document.getElementById('carrito-pago');
+        if(btnPago) {
+            btnPago.onclick = function() {
+                mostrarFormularioPago();
+            };
+        }
+    }
+    // Enlaces funcionales para WhatsApp e Instagram en el menú de contacto
+    (function(){
+        var btnWhatsapp = document.getElementById('contacto-whatsapp');
+        var btnInstagram = document.getElementById('contacto-instagram');
+        if(btnWhatsapp) {
+            btnWhatsapp.addEventListener('click', function(e){
+                e.preventDefault();
+                window.open('https://wa.me/18093948697', '_blank');
+            });
+        }
+        if(btnInstagram) {
+            btnInstagram.addEventListener('click', function(e){
+                e.preventDefault();
+                window.open('https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg=="', '_blank');
+            });
+        }
+    })();
+    // Asignar eventos al cargar la página
+    if(document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', asignarEventoCerrarCarrito);
+    } else {
+        asignarEventoCerrarCarrito();
+    }
+    window.agregarAlCarrito = agregarAlCarrito;
+    window.eliminarDelCarrito = eliminarDelCarrito;
+    window.cerrarCarrito = cerrarCarrito;
+
+    // Acción al pulsar 'Realizar pago'
+    document.getElementById('carrito-pago').addEventListener('click', function() {
+        alert('¡Gracias por tu compra! Pronto nos pondremos en contacto para coordinar el pago y la entrega.');
+        carrito = [];
+        actualizarCarrito();
+        cerrarCarrito();
+    });
+    // Eliminar duplicados de asignación de eventos y asegurar funcionalidad robusta
+    // 1. Eliminar la asignación duplicada de evento para 'carrito-pago' fuera de la función asignarEventoCerrarCarrito
+    // 2. Asegurar que mostrarCarrito() siempre restaure el contenido original del modal y reasigne eventos
+    </script>
+    <footer>
+        <center><p>&copy; 2025 YAYA ORGANIC. Todos los derechos reservados.</p></center>
+        <center><p>Desarrollado por [Ing. Arnaldo Abreu]</p></center>
+    </footer>
+
+    <div id="carrito-modal" class="carrito-modal">
+        <div class="carrito-contenido">
+            <h2>Carrito de Compras</h2>
+            <ul id="carrito-lista">
+                <!-- Productos del carrito -->
+            </ul>
+            <div id="carrito-total" style="font-weight:bold; color:#FF5733; margin-bottom:10px;"></div>
+            <button id="carrito-pago" style="display:none; background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Realizar pago</button>
+            <button id="carrito-cerrar" style="background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Menú hamburguesa móvil -->
+    <!-- <div class="menu-hamburguesa">
+        <button id="btn-menu-movil" aria-label="Abrir menú">☰</button>
+        <span class="logo-mini">YAYA ORGANIC</span>
+    </div> -->
+    <!-- Menú móvil desplegable -->
+    <!-- <nav class="menu-movil-desplegable" id="menu-movil-desplegable">
+        <ul>
+            <li><a href="#inicio"><span>🏠</span>Inicio</a></li>
+            <li><a href="#" class="categorias-toggle"><span>🛍️</span>Categorías</a>
+                <div class="categorias-dropdown">
+                    <a href="#">Jabones</a>
+                    <a href="#">Aceites</a>
+                    <a href="#">Shampoo</a>
+                    <a href="#">Goteros</a>
+                    <a href="#">Cremas</a>
+                    <a href="#">Exfoliantes</a>
+                    <a href="#">Todos</a>
+                </div>
+            </li>
+            <li><a href="#login"><span>🔑</span>Iniciar</a></li>
+            <li><a href="#registro"><span>📝</span>Registro</a></li>
+            <li class="dropdown-inferior">
+                <a href="#" class="contacto-toggle"><span>📞</span>Contacto</a>
+                <div class="contacto-dropdown">
+                    <a href="https://wa.me/18093948697" target="_blank">WhatsApp</a>
+                    <a href="https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg==" target="_blank">Instagram</a>
+                </div>
+            </li>
+            <li><a href="#" id="carrito-superior-movil"><span>🛒</span>Carrito</a></li>
+        </ul>
+    </nav> -->
+    
+    <script>
+    // --- MENÚ HAMBURGUESA MÓVIL FUNCIONALIDAD ROBUSTA ---
+    (function(){
+        const btnMenuMovil = document.getElementById('btn-menu-movil');
+        const menuMovil = document.getElementById('menu-movil-desplegable');
+        // Abrir/cerrar menú hamburguesa
+        btnMenuMovil.addEventListener('click', function(e){
+            e.stopPropagation();
+            menuMovil.classList.toggle('open');
+        });
+        // Submenús: categorías
+        menuMovil.querySelectorAll('.categorias-toggle').forEach(function(btn){
+            btn.addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                const drop = btn.nextElementSibling;
+                if(drop) drop.classList.toggle('open');
+                menuMovil.querySelectorAll('.categorias-dropdown').forEach(function(dd){
+                    if(dd !== drop) dd.classList.remove('open');
+                });
+            });
+        });
+        // Submenú: contacto
+        const btnContactoMovil = menuMovil.querySelector('.contacto-toggle');
+        if(btnContactoMovil) {
+            btnContactoMovil.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const drop = btnContactoMovil.nextElementSibling;
+                if(drop) drop.classList.toggle('open');
+                menuMovil.querySelectorAll('.contacto-dropdown').forEach(function(dd){
+                    if(dd !== drop) dd.classList.remove('open');
+                });
+            });
+        }
+        // Cerrar menú al hacer clic fuera
+        window.addEventListener('click', function(e) {
+            if(!menuMovil.contains(e.target) && e.target !== btnMenuMovil){
+                menuMovil.classList.remove('open');
+                menuMovil.querySelectorAll('.categorias-dropdown, .contacto-dropdown').forEach(function(dd){
+                    dd.classList.remove('open');
+                });
+            }
+        });
+        // Cerrar menú al seleccionar cualquier opción
+        menuMovil.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                menuMovil.classList.remove('open');
+                menuMovil.querySelectorAll('.categorias-dropdown, .contacto-dropdown').forEach(function(dd){
+                    dd.classList.remove('open');
+                });
+            });
+        });
+    })();
+    // Carrito botón superior móvil
+    const btnCarritoMovil = document.getElementById('carrito-superior-movil');
+    if(btnCarritoMovil){
+        btnCarritoMovil.addEventListener('click', function(e){
+            e.preventDefault();
+            mostrarCarrito();
+            menuMovil.classList.remove('open');
+        });
+    }
+    </script>
+
+    <!-- Modal flotante para detalles de producto -->
+    <div id="modal-detalles" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); z-index:3000; align-items:center; justify-content:center;">
+        <div style="background:#fff; border-radius:12px; max-width:90vw; width:350px; padding:28px 22px 18px 22px; box-shadow:0 4px 32px #0003; position:relative; text-align:center; animation:modalIn .25s;">
+            <button id="cerrar-modal-detalles" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:1.5rem; color:#FF5733; cursor:pointer;">&times;</button>
+            <h2 id="modal-detalles-nombre" style="color:#FF5733; margin-bottom:10px;"></h2>
+            <p id="modal-detalles-resumen" style="color:#333; font-size:1.08rem; margin-bottom:10px;"></p>
+            <p id="modal-detalles-descripcion" style="color:#666; font-size:0.98rem;"></p>
+        </div>
+    </div>
+    <script>
+    // Mostrar modal de detalles de producto
+    function mostrarDetallesProducto(nombre, descripcion, resumen) {
+        document.getElementById('modal-detalles-nombre').textContent = nombre;
+        document.getElementById('modal-detalles-resumen').textContent = resumen || '';
+        document.getElementById('modal-detalles-descripcion').textContent = descripcion;
+        document.getElementById('modal-detalles').style.display = 'flex';
+    }
+    // Cerrar modal de detalles
+    function cerrarModalDetalles() {
+        document.getElementById('modal-detalles').style.display = 'none';
+    }
+    // Asignar eventos a los botones de detalles
+    setTimeout(function() {
+        document.querySelectorAll('.btn-detalles').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var card = btn.closest('.producto-card');
+                var nombre = card.getAttribute('data-nombre') || card.querySelector('h3').textContent;
+                var descripcion = card.getAttribute('data-descripcion') || 'Sin descripción.';
+                var resumen = card.getAttribute('data-resumen') || '';
+                mostrarDetallesProducto(nombre, descripcion, resumen);
+            });
+        });
+        document.getElementById('cerrar-modal-detalles').onclick = cerrarModalDetalles;
+        document.getElementById('modal-detalles').addEventListener('click', function(e){
+            if(e.target === this) cerrarModalDetalles();
+        });
+    }, 100);
+    </script>
+
+    <div id="notificacion-carrito" class="notificacion-carrito">¡Tu artículo ha sido agregado al carrito!</div>
+    <script>
+    // Notificación flotante al agregar al carrito
+    function mostrarNotificacionCarrito() {
+        var notif = document.getElementById('notificacion-carrito');
+        if (!notif) return;
+        notif.classList.add('mostrar');
+        setTimeout(function() {
+            notif.classList.remove('mostrar');
+        }, 1800);
+    }
+    // Modificar agregarAlCarrito para mostrar la notificación
+    var carrito = [];
+    function agregarAlCarrito(producto) {
+        carrito.push(producto);
+        actualizarCarrito();
+        mostrarNotificacionCarrito();
+    }
+    </script>
+</body>
+</html>

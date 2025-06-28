@@ -1,0 +1,571 @@
+/* Estilos Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FF5733;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li {
+    list-style: none;
+    position: relative;
+}
+
+nav ul li a {
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    transform: scale(1.1);
+}
+
+/* Menú Desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FF5733;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#carrito button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Sección de Presentación */
+#presentacion {
+    background: linear-gradient(45deg, #FF5733, #FFEBCC);
+    padding: 100px 0;
+    text-align: center;
+}
+
+#presentacion h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#presentacion p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Sección de Productos */
+#inicio {
+    padding: 50px 20px;
+    background-color: #FFEBCC;
+    text-align: center;
+}
+
+#inicio h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.productos-lista {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.producto-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.producto-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.producto-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.producto-card p {
+    color: #FF5733;
+    font-weight: bold;
+}
+
+.producto-card button {
+    padding: 10px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Carrito Modal */
+.carrito-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.carrito-modal .carrito-contenido {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 32px 24px 24px 24px;
+    min-width: 320px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .carrito-modal .carrito-contenido {
+        min-width: 90vw;
+        padding: 18px 6px 12px 6px;
+    }
+}
+
+.carrito-modal h2 {
+    margin-bottom: 20px;
+    color: #FF5733;
+    text-align: center;
+}
+
+.carrito-modal ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carrito-modal ul li {
+    padding: 12px 18px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.carrito-modal ul li:last-child {
+    border-bottom: none;
+}
+
+.carrito-modal ul button {
+    background: #FF5733;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-left: 10px;
+    transition: background 0.2s;
+}
+
+.carrito-modal ul button:hover {
+    background: #e14a24;
+}
+
+.carrito-modal > button {
+    display: block;
+    margin: 20px auto 0 auto;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.carrito-modal > button:hover {
+    background: #FF5733;
+}
+
+/* Formulario de registro bonito */
+#registro form {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px 30px 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#registro form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+#registro form input:focus {
+    border: 1.5px solid #FF5733;
+    outline: none;
+}
+
+#registro form button {
+    background: #FF5733;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+#registro form button:hover {
+    background: #e14a24;
+}
+
+#registro h2 {
+    text-align: center;
+    color: #FF5733;
+    margin-top: 30px;
+}
+
+/* Formulario de inicio de sesión bonito */
+#login form {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px 30px 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#login form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+#login form input:focus {
+    border: 1.5px solid #FF5733;
+    outline: none;
+}
+
+#login form button {
+    background: #FF5733;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+#login form button:hover {
+    background: #e14a24;
+}
+
+#login h2 {
+    text-align: center;
+    color: #FF5733;
+    margin-top: 30px;
+}
+
+/* Menú inferior fijo para móvil/tablet */
+@media (max-width: 1024px) {
+    .nav-principal {
+        display: none;
+    }
+    .nav-inferior {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #FF5733;
+        z-index: 10001;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    }
+    .nav-inferior ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .nav-inferior ul li {
+        flex: 1;
+        text-align: center;
+        padding: 6px 0 2px 0;
+    }
+    .nav-inferior ul li a {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        display: block;
+        padding: 2px 0;
+    }
+    .nav-inferior ul li a span {
+        font-size: 1.5rem;
+        display: block;
+    }
+    .nav-inferior .categorias-dropdown {
+        display: none;
+        position: absolute;
+        bottom: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff6f3c;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.10);
+        min-width: 120px;
+        z-index: 10002;
+        padding: 5px 0;
+    }
+    .nav-inferior .categorias-dropdown.open {
+        display: block;
+    }
+    .nav-inferior .categorias-dropdown a {
+        color: #fff;
+        padding: 10px 20px;
+        display: block;
+        text-align: left;
+        font-size: 1rem;
+    }
+    .nav-inferior .categorias-dropdown a:hover {
+        background: #FF5733;
+    }
+}
+
+@media (min-width: 1025px) {
+    .nav-inferior {
+        display: none !important;
+    }
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+    .productos-lista {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 5px;
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 10px;
+    }
+    nav ul {
+        gap: 15px;
+    }
+    #carrito {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 5px;
+    }
+    .logo h1 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .dropdown-content {
+        position: static;
+        min-width: 100%;
+        box-shadow: none;
+    }
+    .productos-lista {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 5px;
+    }
+    #presentacion {
+        padding: 40px 0 20px 0;
+    }
+    #inicio {
+        padding: 20px 5px;
+    }
+    .producto-card {
+        padding: 12px;
+    }
+    .carrito-modal ul {
+        max-width: 95vw;
+    }
+    .carrito-modal {
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+    #registro form, #login form {
+        max-width: 98vw;
+        padding: 15px 5px 10px 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 6px 2px;
+    }
+    .logo h1 {
+        font-size: 1rem;
+    }
+    .producto-card h3 {
+        font-size: 1rem;
+    }
+    .producto-card p {
+        font-size: 0.95rem;
+    }
+    .carrito-modal {
+        padding-top: 10px;
+    }
+    .carrito-modal h2 {
+        font-size: 1.1rem;
+    }
+    .carrito-modal > button {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+    #registro h2, #login h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Notificación flotante para agregar al carrito */
+.notificacion-carrito {
+    position: fixed;
+    bottom: 100px;
+    right: 32px;
+    background: #FF5733;
+    color: #fff;
+    padding: 18px 32px;
+    border-radius: 32px;
+    box-shadow: 0 6px 32px #0003;
+    font-size: 1.1rem;
+    font-weight: bold;
+    z-index: 99999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s, transform 0.35s;
+    transform: translateY(30px);
+}
+.notificacion-carrito.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+@media (max-width: 600px) {
+    .notificacion-carrito {
+        right: 10px;
+        left: 10px;
+        bottom: 80px;
+        padding: 12px 10px;
+        font-size: 1rem;
+        text-align: center;
+    }
+}
