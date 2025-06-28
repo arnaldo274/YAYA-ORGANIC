@@ -238,10 +238,11 @@
         <div class="presentacion-contenido">
             <h2>Bienvenidos a YAYA ORGANIC</h2>
             <p>Explora nuestra gama de productos naturales para el cuidado personal.</p>
+            <img src="Presentacion.jpg" alt="Presentación YAYA ORGANIC" style="max-width: 100%; height: auto; margin: 32px auto 0 auto; display: block; border-radius: 18px; box-shadow: 0 4px 32px #0001;">
         </div>
     </section>
 
-    <section id="inicio">
+    <section id="inicio" style="display:none;">
         <h2>Nuestros Productos</h2>
         <div class="productos-lista">
             <!-- Producto 1 -->
@@ -484,6 +485,11 @@
     li.classList.toggle('abierto');
     document.getElementById('submenu-categorias-movil').parentElement.classList.remove('abierto');
   });
+  // Mostrar solo presentación al cargar
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('presentacion').style.display = 'block';
+    document.getElementById('inicio').style.display = 'none';
+  });
   // Filtrar productos desde menú móvil (robusto y compatible)
   document.querySelectorAll('.cat-movil').forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -528,7 +534,7 @@
           btnVolver.style.margin = '18px auto 0 auto';
           btnVolver.style.display = 'block';
           btnVolver.style.cursor = 'pointer';
-          btnVolver.onclick = function() { location.reload(); };
+          btnVolver.onclick = function() { mostrarPresentacion(); };
           mensaje.appendChild(btnVolver);
         }
       } else {
@@ -538,17 +544,15 @@
         if (btnVolver) btnVolver.remove();
       }
       // Mostrar solo la sección de productos
-      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-      document.getElementById('presentacion').style.display = 'block';
+      document.getElementById('presentacion').style.display = 'none';
       document.getElementById('inicio').style.display = 'block';
-      // Cerrar menú lateral
       document.getElementById('menu-lateral-movil').classList.remove('abierto');
     });
   });
   // Inicio desde menú móvil
   document.querySelector('#menu-lateral-movil a[href="#inicio"]').addEventListener('click', function(e){
     e.preventDefault();
-    location.reload();
+    mostrarPresentacion();
   });
   // Filtrar productos desde menú de escritorio
   document.querySelectorAll('.nav-principal .dropdown-content a').forEach(function(link) {
@@ -594,7 +598,7 @@
           btnVolver.style.margin = '18px auto 0 auto';
           btnVolver.style.display = 'block';
           btnVolver.style.cursor = 'pointer';
-          btnVolver.onclick = function() { location.reload(); };
+          btnVolver.onclick = function() { mostrarPresentacion(); };
           mensaje.appendChild(btnVolver);
         }
       } else {
@@ -603,15 +607,26 @@
         var btnVolver = document.getElementById('btn-volver-inicio');
         if (btnVolver) btnVolver.remove();
       }
-      // Scroll al inicio de la sección de productos
+      document.getElementById('presentacion').style.display = 'none';
+      document.getElementById('inicio').style.display = 'block';
       document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
     });
   });
   // Inicio desde menú de escritorio
   document.querySelector('.nav-principal a[href="#inicio"]').addEventListener('click', function(e){
     e.preventDefault();
-    location.reload();
+    mostrarPresentacion();
   });
+  // Función para mostrar presentación y ocultar productos
+  function mostrarPresentacion() {
+    document.getElementById('presentacion').style.display = 'block';
+    document.getElementById('inicio').style.display = 'none';
+    // Quitar mensaje de sin productos y botón volver si existen
+    var mensaje = document.getElementById('mensaje-sin-productos');
+    mensaje.style.display = 'none';
+    var btnVolver = document.getElementById('btn-volver-inicio');
+    if (btnVolver) btnVolver.remove();
+  }
   // Hacer funcional el enlace de WhatsApp en el menú de escritorio
   setTimeout(function() {
     var whatsappBtn = document.getElementById('contacto-whatsapp');
