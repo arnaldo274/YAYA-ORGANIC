@@ -691,7 +691,7 @@
     <li class="submenu-movil">
       <a href="#" id="abrir-contacto-movil" class="submenu-toggle">Contacto <span class="flecha-submenu"></span></a>
       <ul class="submenu-lista-movil" id="submenu-contacto-movil">
-        <li><a href="https://wa.me/18093948697" target="_blank">WhatsApp</a></li>
+        <li><a href="https://wa.me/18292641236" target="_blank">WhatsApp</a></li>
         <li><a href="https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg==" target="_blank">Instagram</a></li>
       </ul>
     </li>
@@ -830,7 +830,7 @@
           var btnVolver = document.createElement('button');
           btnVolver.id = 'btn-volver-inicio';
           btnVolver.textContent = 'Volver al inicio';
-          btnVolver.style.background = '#FF5733';
+          btnVolver.style.background = '#28a745';
           btnVolver.style.color = '#fff';
           btnVolver.style.border = 'none';
           btnVolver.style.borderRadius = '6px';
@@ -939,7 +939,7 @@
     if (whatsappBtn) {
         whatsappBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.open('https://wa.me/18093948697', '_blank');
+            window.open('https://wa.me/18292641236', '_blank');
         });
     }
 }, 100);
@@ -1056,7 +1056,7 @@
         lista.innerHTML = '';
         carrito.forEach(function(item, idx) {
             var li = document.createElement('li');
-            li.innerHTML = `<b>${item.nombre}</b> x${item.cantidad} - RD$${(item.precio * item.cantidad).toFixed(2)} <button onclick="eliminarDelCarrito(${idx})" style='background:#FF5733;color:#fff;border:none;border-radius:4px;padding:2px 8px;margin-left:8px;cursor:pointer;'>Quitar</button>`;
+            li.innerHTML = `<b>${item.nombre}</b> x${item.cantidad} - RD$${(item.precio * item.cantidad).toFixed(2)} <button onclick="eliminarDelCarrito(${idx})" style='background:#ff0000;color:#fff;border:none;border-radius:4px;padding:2px 8px;margin-left:8px;cursor:pointer;'>Quitar</button>`;
             lista.appendChild(li);
             total += item.precio * item.cantidad;
         });
