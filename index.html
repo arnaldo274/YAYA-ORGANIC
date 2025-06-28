@@ -16,112 +16,6 @@
         opacity: 0;
         pointer-events: none;
     }
-    /* Mostrar menú inferior solo en móvil/tablet */
-    @media (max-width: 768px) {
-        .nav-principal, .nav-inferior, .nav-superior-movil { display: none !important; }
-        .menu-hamburguesa {
-            display: flex;
-            align-items: center;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 44px;
-            background: #fff;
-            box-shadow: 0 2px 12px #0002;
-            z-index: 2000;
-            padding: 0 10px;
-        }
-        .menu-hamburguesa button {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            color: #FF5733;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        .menu-hamburguesa .logo-mini {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #FF5733;
-            flex: 1;
-            text-align: left;
-        }
-        .menu-movil-desplegable {
-            display: none;
-            position: fixed;
-            top: 44px; left: 0;
-            width: 100vw;
-            background: #fff;
-            box-shadow: 0 2px 12px #0002;
-            z-index: 2100;
-            flex-direction: column;
-            padding: 0;
-            animation: fadeInMenu 0.22s;
-        }
-        .menu-movil-desplegable.open {
-            display: flex;
-        }
-        .menu-movil-desplegable ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-        .menu-movil-desplegable li {
-            border-bottom: 1px solid #eee;
-            position: relative;
-        }
-        .menu-movil-desplegable a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 18px;
-            font-size: 1rem;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.18s, color 0.18s;
-        }
-        .menu-movil-desplegable a span {
-            font-size: 1.2em;
-        }
-        .menu-movil-desplegable a:active, .menu-movil-desplegable a:focus, .menu-movil-desplegable a:hover {
-            background: #FF5733;
-            color: #fff;
-        }
-        .menu-movil-desplegable .categorias-dropdown,
-        .menu-movil-desplegable .contacto-dropdown {
-            display: none;
-            flex-direction: column;
-            background: #fff;
-            box-shadow: 0 2px 12px #0002;
-            border-radius: 0 0 10px 10px;
-            position: static;
-            padding: 0 0 0 24px;
-        }
-        .menu-movil-desplegable .categorias-dropdown.open,
-        .menu-movil-desplegable .contacto-dropdown.open {
-            display: flex;
-        }
-        .menu-movil-desplegable .categorias-dropdown a,
-        .menu-movil-desplegable .contacto-dropdown a {
-            padding: 10px 0;
-            font-size: 0.98rem;
-            color: #333;
-            border-radius: 0;
-        }
-        .menu-movil-desplegable .categorias-dropdown a:hover,
-        .menu-movil-desplegable .contacto-dropdown a:hover {
-            background: #FF5733;
-            color: #fff;
-        }
-        body { padding-top: 44px !important; }
-    }
-    @media (min-width: 769px) {
-        .nav-superior-movil { display: none !important; }
-        .nav-principal { display: block !important; }
-        body { padding-top: 0 !important; }
-    }
     .producto-botones {
         display: flex;
         gap: 10px;
@@ -149,6 +43,107 @@
         opacity: 1;
         transform: translateY(0);
     }
+    @media (max-width: 768px) {
+  .menu-movil-btn {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4000;
+    width: 56px;
+    height: 56px;
+    background: transparent;
+  }
+  .menu-movil-btn button {
+    margin: 8px;
+    background: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0002;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+  .menu-movil-btn button:active {
+    box-shadow: 0 4px 16px #0003;
+  }
+  .menu-bar {
+    display: block;
+    width: 28px;
+    height: 4px;
+    margin: 3px 0;
+    background: #FF5733;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .menu-lateral-movil {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    width: 78vw;
+    max-width: 320px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: 2px 0 16px #0002;
+    z-index: 3999;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(.4,1.3,.5,1);
+    padding-top: 24px;
+  }
+  .menu-lateral-movil.abierto {
+    transform: translateX(0);
+  }
+  .menu-lateral-movil button#cerrar-menu-movil {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #FF5733;
+    position: absolute;
+    top: 10px; right: 18px;
+    cursor: pointer;
+  }
+  .menu-lateral-movil ul {
+    list-style: none;
+    padding: 0 0 0 18px;
+    margin: 0;
+  }
+  .menu-lateral-movil ul > li {
+    margin-bottom: 8px;
+  }
+  .menu-lateral-movil a {
+    color: #FF5733;
+    font-size: 1.15rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0 10px 0;
+    border-radius: 6px;
+    transition: background 0.18s, color 0.18s;
+  }
+  .menu-lateral-movil a:hover {
+    background: #FF5733;
+    color: #fff;
+  }
+  .submenu-lista-movil {
+    display: none;
+    padding-left: 12px;
+    margin-top: 0;
+  }
+  .submenu-movil.abierto > .submenu-lista-movil {
+    display: block;
+  }
+  body { padding-top: 56px !important; }
+}
+@media (min-width: 769px) {
+  .menu-movil-btn, .menu-lateral-movil { display: none !important; }
+}
     </style>
 </head>
 <body>
@@ -178,8 +173,6 @@
                         <a href="#" id="contacto-instagram">Instagram</a>
                     </div>
                 </li>
-                <li><a href="#login">Iniciar Sesión</a></li>
-                <li><a href="#registro">Registrarse</a></li>
             </ul>
         </nav>
         <div id="carrito">
@@ -203,7 +196,7 @@
             <div class="producto-card" data-categoria="jabones" data-nombre="Jabón Natural" data-descripcion="Jabón artesanal natural, ideal para todo tipo de piel. Hidratante y suave." data-resumen="Un jabón natural hecho a mano, perfecto para el uso diario y todo tipo de piel.">
                 <img src="https://via.placeholder.com/300x200?text=Jabón+Natural" alt="Jabón Natural">
                 <h3>Jabón Natural</h3>
-                <p>RD$15.00</p>
+                <p>RD$500.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Jabón Natural', precio: 15 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -214,7 +207,7 @@
             <div class="producto-card" data-categoria="jabones" data-nombre="Jabón Natural" data-descripcion="Jabón artesanal natural, ideal para todo tipo de piel. Hidratante y suave." data-resumen="Un jabón natural hecho a mano, perfecto para el uso diario y todo tipo de piel.">
                 <img src="https://via.placeholder.com/300x200?text=Jabón+Natural" alt="Jabón Natural">
                 <h3>Jabón Natural</h3>
-                <p>RD$15.00</p>
+                <p>RD$300.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Jabón Natural', precio: 15 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -225,7 +218,7 @@
             <div class="producto-card" data-categoria="aceites" data-nombre="Aceite Esencial" data-descripcion="Aceite esencial puro, perfecto para masajes y aromaterapia. Relajante y natural." data-resumen="Aceite esencial puro para masajes, aromaterapia y relajación natural.">
                 <img src="https://via.placeholder.com/300x200?text=Aceite+Esencial" alt="Aceite Esencial">
                 <h3>Aceite Esencial</h3>
-                <p>RD$25.00</p>
+                <p>RD$350.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Aceite Esencial', precio: 25 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -236,7 +229,7 @@
             <div class="producto-card" data-categoria="aceites" data-nombre="Aceite Esencial" data-descripcion="Aceite esencial puro, perfecto para masajes y aromaterapia. Relajante y natural." data-resumen="Aceite esencial puro para masajes, aromaterapia y relajación natural.">
                 <img src="https://via.placeholder.com/300x200?text=Aceite+Esencial" alt="Aceite Esencial">
                 <h3>Aceite Esencial</h3>
-                <p>RD$25.00</p>
+                <p>RD$325.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Aceite Esencial', precio: 25 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -258,7 +251,7 @@
             <div class="producto-card" data-categoria="jabones" data-nombre="Jabón de Lavanda" data-descripcion="Jabón de lavanda relajante, ayuda a calmar la piel y el ánimo." data-resumen="Jabón relajante con aroma a lavanda, ideal para calmar la piel y el ánimo.">
                 <img src="https://via.placeholder.com/300x200?text=Jabón+de+Lavanda" alt="Jabón de Lavanda">
                 <h3>Jabón de Lavanda</h3>
-                <p>RD$18.00</p>
+                <p>RD$400.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Jabón de Lavanda', precio: 18 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -269,7 +262,7 @@
             <div class="producto-card" data-categoria="cremas" data-nombre="Crema Hidratante" data-descripcion="Crema hidratante con ingredientes naturales, ideal para piel seca." data-resumen="Crema hidratante natural, perfecta para piel seca y sensible.">
                 <img src="https://via.placeholder.com/300x200?text=Crema+Hidratante" alt="Crema Hidratante">
                 <h3>Crema Hidratante</h3>
-                <p>RD%22.00</p>
+                <p>RD$400.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Crema Hidratante', precio: 22 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -280,7 +273,7 @@
             <div class="producto-card" data-categoria="aceites" data-nombre="Aceite de Argán" data-descripcion="Aceite de argán puro, nutre y repara el cabello y la piel." data-resumen="Aceite de argán puro para nutrir y reparar cabello y piel.">
                 <img src="https://via.placeholder.com/300x200?text=Aceite+de+Argán" alt="Aceite de Argán">
                 <h3>Aceite de Argán</h3>
-                <p>RD$30.00</p>
+                <p>RD$300.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Aceite de Argán', precio: 30 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -291,7 +284,7 @@
             <div class="producto-card" data-categoria="exfoliantes" data-nombre="Exfoliante Natural" data-descripcion="Exfoliante natural suave, elimina impurezas y deja la piel radiante." data-resumen="Exfoliante suave que elimina impurezas y deja la piel radiante.">
                 <img src="https://via.placeholder.com/300x200?text=Exfoliante+Natural" alt="Exfoliante Natural">
                 <h3>Exfoliante Natural</h3>
-                <p>RD$17.00</p>
+                <p>RD$250.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Exfoliante Natural', precio: 17 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
@@ -302,279 +295,286 @@
             <div class="producto-card" data-categoria="jabones" data-nombre="Jabón de Rosa Mosqueta" data-descripcion="Jabón de rosa mosqueta, regenera y suaviza la piel." data-resumen="Jabón de rosa mosqueta que regenera y suaviza la piel.">
                 <img src="https://via.placeholder.com/300x200?text=Jabón+de+Rosa+Mosqueta" alt="Jabón de Rosa Mosqueta">
                 <h3>Jabón de Rosa Mosqueta</h3>
-                <p>RD$19.00</p>
+                <p>RD$350.00</p>
                 <div class="producto-botones">
                     <button onclick="agregarAlCarrito({ nombre: 'Jabón de Rosa Mosqueta', precio: 19 })">Agregar al Carrito</button>
                     <button class="btn-detalles">Detalles</button>
                 </div>
             </div>
         </div>
+        <div id="mensaje-sin-productos" style="display:none; text-align:center; color:#FF5733; font-weight:bold; font-size:1.15rem; margin:32px 0 0 0;">No hay productos en esta categoría.</div>
     </section>
 
-    <section id="registro" style="display:none;">
-        <h2>Registrarse</h2>
-        <form id="form-registro">
-            <input type="text" placeholder="Nombre" name="nombre" required>
-            <input type="text" placeholder="Apellido" name="apellido" required>
-            <input type="tel" placeholder="Teléfono" name="telefono" required>
-            <input type="text" placeholder="Dirección" name="direccion" required>
-            <input type="email" placeholder="Correo Electrónico" name="correo" required>
-            <input type="password" placeholder="Contraseña" name="password" required>
-            <button type="submit">Registrar</button>
-        </form>
-    </section>
-
-    <section id="login" style="display:none;">
-        <h2>Iniciar Sesión</h2>
-        <form id="form-login">
-            <input type="email" placeholder="Correo Electrónico" name="correo" required>
-            <input type="password" placeholder="Contraseña" name="password" required>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    </section>
-
+    <!-- BOTÓN MENÚ HAMBURGUESA Y MENÚ LATERAL MÓVIL -->
+<div id="menu-movil-btn" class="menu-movil-btn" style="display:none;">
+  <button id="abrir-menu-movil" aria-label="Abrir menú">
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+  </button>
+</div>
+<nav id="menu-lateral-movil" class="menu-lateral-movil">
+  <button id="cerrar-menu-movil" aria-label="Cerrar menú">&times;</button>
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li class="submenu-movil">
+      <a href="#" id="abrir-categorias-movil" class="submenu-toggle">Categorías <span class="flecha-submenu"></span></a>
+      <ul class="submenu-lista-movil" id="submenu-categorias-movil">
+        <li><a href="#" class="cat-movil">Jabones</a></li>
+        <li><a href="#" class="cat-movil">Aceites</a></li>
+        <li><a href="#" class="cat-movil">Shampoo</a></li>
+        <li><a href="#" class="cat-movil">Goteros</a></li>
+        <li><a href="#" class="cat-movil">Cremas</a></li>
+        <li><a href="#" class="cat-movil">Exfoliantes</a></li>
+        <li><a href="#" class="cat-movil">Todos</a></li>
+      </ul>
+    </li>
+    <li class="submenu-movil">
+      <a href="#" id="abrir-contacto-movil" class="submenu-toggle">Contacto <span class="flecha-submenu"></span></a>
+      <ul class="submenu-lista-movil" id="submenu-contacto-movil">
+        <li><a href="https://wa.me/18093948697" target="_blank">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg==" target="_blank">Instagram</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    <style>
+@media (max-width: 768px) {
+  .submenu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+  .flecha-submenu {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+    border-right: 2.5px solid #FF5733;
+    border-bottom: 2.5px solid #FF5733;
+    transform: rotate(45deg);
+    transition: transform 0.22s;
+    margin-top: 2px;
+  }
+  .submenu-movil.abierto > .submenu-toggle .flecha-submenu {
+    transform: rotate(-135deg);
+    margin-top: 6px;
+  }
+  .submenu-lista-movil {
+    display: none;
+    padding-left: 12px;
+    margin-top: 0;
+    background: #fff;
+    border-left: 2px solid #FF5733;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px #0001;
+  }
+  .submenu-movil.abierto > .submenu-lista-movil {
+    display: block;
+    animation: fadeInSubmenu 0.18s;
+  }
+  @keyframes fadeInSubmenu {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+</style>
     <script>
-    var btnRegistro = document.querySelector('a[href="#registro"]');
-    if(btnRegistro) {
-        btnRegistro.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-            document.getElementById('registro').style.display = 'block';
-        });
-    }
-    var btnLogin = document.querySelector('a[href="#login"]');
-    if(btnLogin) {
-        btnLogin.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-            document.getElementById('login').style.display = 'block';
-        });
-    }
-    var btnInicio = document.querySelector('a[href="#inicio"]');
-    if(btnInicio) {
-        btnInicio.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-            document.getElementById('presentacion').style.display = 'block';
-            document.getElementById('inicio').style.display = 'block';
-            filtrarProductos('todos'); // Siempre mostrar todos los productos al volver al inicio
-        });
-    }
-    function mostrarCarrito() {
-        var modal = document.getElementById('carrito-modal');
-        var contenido = document.querySelector('.carrito-contenido');
-        // Restaurar el contenido original del modal
-        contenido.innerHTML = `
-            <h2>Carrito de Compras</h2>
-            <ul id="carrito-lista"></ul>
-            <div id="carrito-total" style="font-weight:bold; color:#FF5733; margin-bottom:10px;"></div>
-            <button id="carrito-pago" style="display:none; background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Realizar pago</button>
-            <button id="carrito-cerrar" style="background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Cerrar</button>
-        `;
-        modal.style.display = 'flex';
-        modal.classList.remove('fade-out');
-        mostrarArticulosCarrito();
-        asignarEventoCerrarCarrito();
-    }
-    var btnCarrito = document.querySelector('#carrito button');
-    if(btnCarrito) {
-        btnCarrito.addEventListener('click', function(e) {
-            e.preventDefault();
-            mostrarCarrito();
-        });
-    }
-    var btnCarritoInferior = document.getElementById('carrito-inferior');
-    if(btnCarritoInferior) {
-        btnCarritoInferior.addEventListener('click', function(e) {
-            e.preventDefault();
-            mostrarCarrito();
-        });
-    }
-    // Carrito funcionalidad básica
-    var carrito = [];
-    function agregarAlCarrito(producto) {
-        carrito.push(producto);
-        actualizarCarrito();
-        mostrarNotificacionCarrito();
-    }
-    function eliminarDelCarrito(index) {
-        carrito.splice(index, 1);
-        actualizarCarrito();
-    }
-    function actualizarCarrito() {
-        document.getElementById('cantidad-carrito').textContent = carrito.length;
-        mostrarArticulosCarrito();
-    }
-    function mostrarArticulosCarrito() {
-        var lista = document.getElementById('carrito-lista');
-        lista.innerHTML = '';
-        var total = 0;
-        if(carrito.length === 0) {
-            lista.innerHTML = '<li>El carrito está vacío.</li>';
-            document.getElementById('carrito-total').textContent = '';
-            document.getElementById('carrito-pago').style.display = 'none';
-        } else {
-            carrito.forEach(function(item, i) {
-                var li = document.createElement('li');
-                li.innerHTML = item.nombre + ' - $' + item.precio + ' <button onclick="eliminarDelCarrito(' + i + ')">Eliminar</button>';
-                lista.appendChild(li);
-                total += Number(item.precio);
-            });
-            document.getElementById('carrito-total').textContent = 'Total: $' + total.toFixed(2);
-            document.getElementById('carrito-pago').style.display = 'block';
-        }
-    }
-    // Filtrar productos por categoría
-    function filtrarProductos(categoria) {
-        document.querySelectorAll('.producto-card').forEach(function(card) {
-            if (categoria === 'todos') {
-                card.style.display = 'block';
-            } else {
-                var cat = card.getAttribute('data-categoria');
-                card.style.display = (cat === categoria) ? 'block' : 'none';
-            }
-        });
-    }
-    // Asignar eventos a las categorías (menú superior e inferior)
-    document.querySelectorAll('.dropdown-content a, .categorias-dropdown a').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            var categoria = this.textContent.trim().toLowerCase();
-            if (categoria === 'jabones') filtrarProductos('jabones');
-            else if (categoria === 'shampoo') filtrarProductos('shampoo');
-            else if (categoria === 'aceites') filtrarProductos('aceites');
-            else if (categoria === 'exfoliantes') filtrarProductos('exfoliantes');
-            else if (categoria === 'cremas') filtrarProductos('cremas');
-            else if (categoria === 'goteros') filtrarProductos('goteros');
-            else if (categoria === 'todos') filtrarProductos('todos');
-            else filtrarProductos('todos');
-            // Mostrar solo la sección de productos
-            document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-            document.getElementById('presentacion').style.display = 'block';
-            document.getElementById('inicio').style.display = 'block';
-        });
-    });
-    // Menú inferior móvil: mostrar/ocultar categorías
-    document.querySelectorAll('.categorias-toggle').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-            e.preventDefault();
-            var drop = btn.querySelector('.categorias-dropdown');
-            if(drop) drop.classList.toggle('open');
-            // Cerrar otros dropdowns
-            document.querySelectorAll('.categorias-dropdown').forEach(function(dd){
-                if(dd !== drop) dd.classList.remove('open');
-            });
-        });
-    });
-    // Menú inferior móvil: mostrar/ocultar contacto
-    var btnContactoInferior = document.querySelector('.contacto-toggle');
-    if(btnContactoInferior) {
-        btnContactoInferior.addEventListener('click', function(e) {
-            e.preventDefault();
-            var drop = btnContactoInferior.nextElementSibling;
-            if(drop) drop.classList.toggle('open');
-            // Cerrar otros dropdowns
-            document.querySelectorAll('.contacto-dropdown').forEach(function(dd){
-                if(dd !== drop) dd.classList.remove('open');
-            });
-        });
-    }
-    // Cerrar el submenú de contacto inferior al hacer clic fuera
-    window.addEventListener('click', function(e) {
-        var btnContactoInferior = document.querySelector('.contacto-toggle');
-        var drop = btnContactoInferior ? btnContactoInferior.nextElementSibling : null;
-        if(drop && !drop.contains(e.target) && e.target !== btnContactoInferior) {
-            drop.classList.remove('open');
-        }
-    });
-    function cerrarCarrito() {
-        var modal = document.getElementById('carrito-modal');
-        modal.classList.add('fade-out');
-        setTimeout(function() {
-            modal.style.display = 'none';
-            modal.classList.remove('fade-out');
-        }, 400);
-    }
-    function mostrarFormularioPago() {
-        var modal = document.getElementById('carrito-modal');
-        var contenido = document.querySelector('.carrito-contenido');
-        contenido.innerHTML = `
-            <h2>Transferencia Bancaria</h2>
-            <ul style="text-align:left; margin-bottom:15px;">
-                <li><b>Banco Popular Ahorro</b>  825900525 Yandry Martinez</li>
-                <li><b>Banco BHD Ahorro</b>  35431370010 Yandry Martinez</li>
-            </ul>
-            <label style="font-weight:bold;">Adjunta tu baucher de transferencia:</label><br>
-            <input type="file" id="baucher-input" accept="image/*" style="margin:10px 0 20px 0;"><br>
-            <button id="enviar-whatsapp" style="background:#25D366; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px 10px 0 0; display:inline-block;">Enviar por WhatsApp</button>
-            <button id="volver-carrito" style="background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px 0 0 0; display:inline-block;">Volver</button>
-        `;
-        // Evento para volver al carrito
-        document.getElementById('volver-carrito').onclick = function() {
-            // Restaurar el contenido original del carrito
-            mostrarCarrito();
-        };
-        // Evento para enviar por WhatsApp
-        document.getElementById('enviar-whatsapp').onclick = function() {
-            var input = document.getElementById('baucher-input');
-            var mensaje = encodeURIComponent('Hola, adjunto mi baucher de transferencia para la compra en YAYA ORGANIC.');
-            var numero = '18093948697'; // Cambia por el número real
-            var url = 'https://wa.me/' + numero + '?text=' + mensaje;
-            window.open(url, '_blank');
-            alert('Recuerda adjuntar la imagen del baucher en el chat de WhatsApp.');
-        };
-    }
-    function asignarEventoCerrarCarrito() {
-        var btnCerrarCarrito = document.getElementById('carrito-cerrar');
-        if(btnCerrarCarrito) {
-            btnCerrarCarrito.onclick = function() {
-                cerrarCarrito();
-            };
-        }
-        var btnPago = document.getElementById('carrito-pago');
-        if(btnPago) {
-            btnPago.onclick = function() {
-                mostrarFormularioPago();
-            };
-        }
-    }
-    // Enlaces funcionales para WhatsApp e Instagram en el menú de contacto
     (function(){
-        var btnWhatsapp = document.getElementById('contacto-whatsapp');
-        var btnInstagram = document.getElementById('contacto-instagram');
-        if(btnWhatsapp) {
-            btnWhatsapp.addEventListener('click', function(e){
-                e.preventDefault();
-                window.open('https://wa.me/18093948697', '_blank');
-            });
-        }
-        if(btnInstagram) {
-            btnInstagram.addEventListener('click', function(e){
-                e.preventDefault();
-                window.open('https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg=="', '_blank');
-            });
-        }
-    })();
-    // Asignar eventos al cargar la página
-    if(document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', asignarEventoCerrarCarrito);
+  // Mostrar botón solo en móvil
+  function mostrarMenuBtn() {
+    if(window.innerWidth <= 768) {
+      document.getElementById('menu-movil-btn').style.display = 'block';
     } else {
-        asignarEventoCerrarCarrito();
+      document.getElementById('menu-movil-btn').style.display = 'none';
+      document.getElementById('menu-lateral-movil').classList.remove('abierto');
     }
-    window.agregarAlCarrito = agregarAlCarrito;
-    window.eliminarDelCarrito = eliminarDelCarrito;
-    window.cerrarCarrito = cerrarCarrito;
-
-    // Acción al pulsar 'Realizar pago'
-    document.getElementById('carrito-pago').addEventListener('click', function() {
-        alert('¡Gracias por tu compra! Pronto nos pondremos en contacto para coordinar el pago y la entrega.');
-        carrito = [];
-        actualizarCarrito();
-        cerrarCarrito();
+  }
+  window.addEventListener('resize', mostrarMenuBtn);
+  document.addEventListener('DOMContentLoaded', mostrarMenuBtn);
+  // Abrir/cerrar menú
+  const abrirBtn = document.getElementById('abrir-menu-movil');
+  const cerrarBtn = document.getElementById('cerrar-menu-movil');
+  const menuLateral = document.getElementById('menu-lateral-movil');
+  abrirBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    menuLateral.classList.add('abierto');
+  });
+  cerrarBtn.addEventListener('click', function(){
+    menuLateral.classList.remove('abierto');
+  });
+  // Cerrar al hacer clic fuera
+  window.addEventListener('click', function(e){
+    if(menuLateral.classList.contains('abierto') && !menuLateral.contains(e.target) && e.target !== abrirBtn){
+      menuLateral.classList.remove('abierto');
+    }
+  });
+  // Submenús
+  document.getElementById('abrir-categorias-movil').addEventListener('click', function(e){
+    e.preventDefault();
+    let li = this.parentElement;
+    li.classList.toggle('abierto');
+    document.getElementById('submenu-contacto-movil').parentElement.classList.remove('abierto');
+  });
+  document.getElementById('abrir-contacto-movil').addEventListener('click', function(e){
+    e.preventDefault();
+    let li = this.parentElement;
+    li.classList.toggle('abierto');
+    document.getElementById('submenu-categorias-movil').parentElement.classList.remove('abierto');
+  });
+  // Filtrar productos desde menú móvil (robusto y compatible)
+  document.querySelectorAll('.cat-movil').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var categoria = this.textContent.trim().toLowerCase();
+      var map = {
+        'jabones': 'jabones',
+        'aceites': 'aceites',
+        'shampoo': 'shampoo',
+        'goteros': 'goteros',
+        'cremas': 'cremas',
+        'exfoliantes': 'exfoliantes',
+        'todos': 'todos'
+      };
+      var cat = map[categoria] || 'todos';
+      document.querySelectorAll('.producto-card').forEach(function(card) {
+        var cardCat = card.getAttribute('data-categoria');
+        if (cat === 'todos') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = (cardCat === cat) ? 'block' : 'none';
+        }
+      });
+      // Mostrar/ocultar mensaje de sin productos
+      var cards = Array.from(document.querySelectorAll('.producto-card'));
+      var hayProductos = cards.some(function(card){ return card.style.display !== 'none'; });
+      var mensaje = document.getElementById('mensaje-sin-productos');
+      if (!hayProductos) {
+        mensaje.style.display = 'block';
+        // Agregar botón de volver al inicio si no existe
+        if (!document.getElementById('btn-volver-inicio')) {
+          var btnVolver = document.createElement('button');
+          btnVolver.id = 'btn-volver-inicio';
+          btnVolver.textContent = 'Volver al inicio';
+          btnVolver.style.background = '#FF5733';
+          btnVolver.style.color = '#fff';
+          btnVolver.style.border = 'none';
+          btnVolver.style.borderRadius = '6px';
+          btnVolver.style.padding = '10px 24px';
+          btnVolver.style.fontSize = '1rem';
+          btnVolver.style.fontWeight = 'bold';
+          btnVolver.style.margin = '18px auto 0 auto';
+          btnVolver.style.display = 'block';
+          btnVolver.style.cursor = 'pointer';
+          btnVolver.onclick = function() { location.reload(); };
+          mensaje.appendChild(btnVolver);
+        }
+      } else {
+        mensaje.style.display = 'none';
+        // Quitar botón si existe
+        var btnVolver = document.getElementById('btn-volver-inicio');
+        if (btnVolver) btnVolver.remove();
+      }
+      // Mostrar solo la sección de productos
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+      document.getElementById('presentacion').style.display = 'block';
+      document.getElementById('inicio').style.display = 'block';
+      // Cerrar menú lateral
+      document.getElementById('menu-lateral-movil').classList.remove('abierto');
     });
-    // Eliminar duplicados de asignación de eventos y asegurar funcionalidad robusta
-    // 1. Eliminar la asignación duplicada de evento para 'carrito-pago' fuera de la función asignarEventoCerrarCarrito
-    // 2. Asegurar que mostrarCarrito() siempre restaure el contenido original del modal y reasigne eventos
+  });
+  // Inicio desde menú móvil
+  document.querySelector('#menu-lateral-movil a[href="#inicio"]').addEventListener('click', function(e){
+    e.preventDefault();
+    location.reload();
+  });
+  // Filtrar productos desde menú de escritorio
+  document.querySelectorAll('.nav-principal .dropdown-content a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var categoria = this.textContent.trim().toLowerCase();
+      var map = {
+        'jabones': 'jabones',
+        'aceites': 'aceites',
+        'shampoo': 'shampoo',
+        'goteros': 'goteros',
+        'cremas': 'cremas',
+        'exfoliantes': 'exfoliantes',
+        'todos': 'todos'
+      };
+      var cat = map[categoria] || 'todos';
+      document.querySelectorAll('.producto-card').forEach(function(card) {
+        var cardCat = card.getAttribute('data-categoria');
+        if (cat === 'todos') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = (cardCat === cat) ? 'block' : 'none';
+        }
+      });
+      // Mostrar/ocultar mensaje de sin productos
+      var cards = Array.from(document.querySelectorAll('.producto-card'));
+      var hayProductos = cards.some(function(card){ return card.style.display !== 'none'; });
+      var mensaje = document.getElementById('mensaje-sin-productos');
+      if (!hayProductos) {
+        mensaje.style.display = 'block';
+        // Agregar botón de volver al inicio si no existe
+        if (!document.getElementById('btn-volver-inicio')) {
+          var btnVolver = document.createElement('button');
+          btnVolver.id = 'btn-volver-inicio';
+          btnVolver.textContent = 'Volver al inicio';
+          btnVolver.style.background = '#FF5733';
+          btnVolver.style.color = '#fff';
+          btnVolver.style.border = 'none';
+          btnVolver.style.borderRadius = '6px';
+          btnVolver.style.padding = '10px 24px';
+          btnVolver.style.fontSize = '1rem';
+          btnVolver.style.fontWeight = 'bold';
+          btnVolver.style.margin = '18px auto 0 auto';
+          btnVolver.style.display = 'block';
+          btnVolver.style.cursor = 'pointer';
+          btnVolver.onclick = function() { location.reload(); };
+          mensaje.appendChild(btnVolver);
+        }
+      } else {
+        mensaje.style.display = 'none';
+        // Quitar botón si existe
+        var btnVolver = document.getElementById('btn-volver-inicio');
+        if (btnVolver) btnVolver.remove();
+      }
+      // Scroll al inicio de la sección de productos
+      document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+  // Inicio desde menú de escritorio
+  document.querySelector('.nav-principal a[href="#inicio"]').addEventListener('click', function(e){
+    e.preventDefault();
+    location.reload();
+  });
+  // Hacer funcional el enlace de WhatsApp en el menú de escritorio
+  setTimeout(function() {
+    var whatsappBtn = document.getElementById('contacto-whatsapp');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://wa.me/18093948697', '_blank');
+        });
+    }
+}, 100);
+  // Hacer funcional el enlace de Instagram en el menú de escritorio
+  setTimeout(function() {
+    var instaBtn = document.getElementById('contacto-instagram');
+    if (instaBtn) {
+        instaBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg==', '_blank');
+        });
+    }
+  }, 100);
+})();
     </script>
     <footer>
         <center><p>&copy; 2025 YAYA ORGANIC. Todos los derechos reservados.</p></center>
@@ -592,104 +592,6 @@
             <button id="carrito-cerrar" style="background:#FF5733; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;">Cerrar</button>
         </div>
     </div>
-
-    <!-- Menú hamburguesa móvil -->
-    <!-- <div class="menu-hamburguesa">
-        <button id="btn-menu-movil" aria-label="Abrir menú">☰</button>
-        <span class="logo-mini">YAYA ORGANIC</span>
-    </div> -->
-    <!-- Menú móvil desplegable -->
-    <!-- <nav class="menu-movil-desplegable" id="menu-movil-desplegable">
-        <ul>
-            <li><a href="#inicio"><span>🏠</span>Inicio</a></li>
-            <li><a href="#" class="categorias-toggle"><span>🛍️</span>Categorías</a>
-                <div class="categorias-dropdown">
-                    <a href="#">Jabones</a>
-                    <a href="#">Aceites</a>
-                    <a href="#">Shampoo</a>
-                    <a href="#">Goteros</a>
-                    <a href="#">Cremas</a>
-                    <a href="#">Exfoliantes</a>
-                    <a href="#">Todos</a>
-                </div>
-            </li>
-            <li><a href="#login"><span>🔑</span>Iniciar</a></li>
-            <li><a href="#registro"><span>📝</span>Registro</a></li>
-            <li class="dropdown-inferior">
-                <a href="#" class="contacto-toggle"><span>📞</span>Contacto</a>
-                <div class="contacto-dropdown">
-                    <a href="https://wa.me/18093948697" target="_blank">WhatsApp</a>
-                    <a href="https://www.instagram.com/yaya_orgnic?igsh=MXd1N3Z1a200cjRjZg==" target="_blank">Instagram</a>
-                </div>
-            </li>
-            <li><a href="#" id="carrito-superior-movil"><span>🛒</span>Carrito</a></li>
-        </ul>
-    </nav> -->
-    
-    <script>
-    // --- MENÚ HAMBURGUESA MÓVIL FUNCIONALIDAD ROBUSTA ---
-    (function(){
-        const btnMenuMovil = document.getElementById('btn-menu-movil');
-        const menuMovil = document.getElementById('menu-movil-desplegable');
-        // Abrir/cerrar menú hamburguesa
-        btnMenuMovil.addEventListener('click', function(e){
-            e.stopPropagation();
-            menuMovil.classList.toggle('open');
-        });
-        // Submenús: categorías
-        menuMovil.querySelectorAll('.categorias-toggle').forEach(function(btn){
-            btn.addEventListener('click', function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                const drop = btn.nextElementSibling;
-                if(drop) drop.classList.toggle('open');
-                menuMovil.querySelectorAll('.categorias-dropdown').forEach(function(dd){
-                    if(dd !== drop) dd.classList.remove('open');
-                });
-            });
-        });
-        // Submenú: contacto
-        const btnContactoMovil = menuMovil.querySelector('.contacto-toggle');
-        if(btnContactoMovil) {
-            btnContactoMovil.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const drop = btnContactoMovil.nextElementSibling;
-                if(drop) drop.classList.toggle('open');
-                menuMovil.querySelectorAll('.contacto-dropdown').forEach(function(dd){
-                    if(dd !== drop) dd.classList.remove('open');
-                });
-            });
-        }
-        // Cerrar menú al hacer clic fuera
-        window.addEventListener('click', function(e) {
-            if(!menuMovil.contains(e.target) && e.target !== btnMenuMovil){
-                menuMovil.classList.remove('open');
-                menuMovil.querySelectorAll('.categorias-dropdown, .contacto-dropdown').forEach(function(dd){
-                    dd.classList.remove('open');
-                });
-            }
-        });
-        // Cerrar menú al seleccionar cualquier opción
-        menuMovil.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                menuMovil.classList.remove('open');
-                menuMovil.querySelectorAll('.categorias-dropdown, .contacto-dropdown').forEach(function(dd){
-                    dd.classList.remove('open');
-                });
-            });
-        });
-    })();
-    // Carrito botón superior móvil
-    const btnCarritoMovil = document.getElementById('carrito-superior-movil');
-    if(btnCarritoMovil){
-        btnCarritoMovil.addEventListener('click', function(e){
-            e.preventDefault();
-            mostrarCarrito();
-            menuMovil.classList.remove('open');
-        });
-    }
-    </script>
 
     <!-- Modal flotante para detalles de producto -->
     <div id="modal-detalles" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); z-index:3000; align-items:center; justify-content:center;">
@@ -743,11 +645,188 @@
     }
     // Modificar agregarAlCarrito para mostrar la notificación
     var carrito = [];
+    // Modificar agregarAlCarrito para tomar el precio real del HTML
     function agregarAlCarrito(producto) {
-        carrito.push(producto);
+        // Buscar la tarjeta del producto por nombre
+        var cards = document.querySelectorAll('.producto-card');
+        var card = Array.from(cards).find(function(c) {
+            return (c.getAttribute('data-nombre') || '').trim() === producto.nombre;
+        });
+        if (card) {
+            // Tomar el precio mostrado en la tarjeta (ej: RD$500.00)
+            var precioTexto = card.querySelector('p').textContent;
+            var precio = parseFloat(precioTexto.replace(/[^\d.]/g, ''));
+            if (!isNaN(precio)) {
+                producto.precio = precio;
+            }
+        }
+        // Buscar si el producto ya está en el carrito
+        var existente = carrito.find(function(item) { return item.nombre === producto.nombre; });
+        if (existente) {
+            existente.cantidad = (existente.cantidad || 1) + 1;
+        } else {
+            producto.cantidad = 1;
+            carrito.push(producto);
+        }
         actualizarCarrito();
         mostrarNotificacionCarrito();
     }
+    function actualizarCarrito() {
+        var lista = document.getElementById('carrito-lista');
+        var total = 0;
+        lista.innerHTML = '';
+        carrito.forEach(function(item, idx) {
+            var li = document.createElement('li');
+            li.innerHTML = `<b>${item.nombre}</b> x${item.cantidad} - RD$${(item.precio * item.cantidad).toFixed(2)} <button onclick="eliminarDelCarrito(${idx})" style='background:#FF5733;color:#fff;border:none;border-radius:4px;padding:2px 8px;margin-left:8px;cursor:pointer;'>Quitar</button>`;
+            lista.appendChild(li);
+            total += item.precio * item.cantidad;
+        });
+        document.getElementById('carrito-total').textContent = total > 0 ? 'Total: RD$' + total.toFixed(2) : '';
+        document.getElementById('cantidad-carrito').textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+        document.getElementById('carrito-pago').style.display = total > 0 ? 'block' : 'none';
+    }
+    function eliminarDelCarrito(idx) {
+        carrito.splice(idx, 1);
+        actualizarCarrito();
+    }
+    function mostrarCarrito() {
+        document.getElementById('carrito-modal').style.display = 'block';
+    }
+    document.getElementById('carrito-cerrar').onclick = function() {
+        document.getElementById('carrito-modal').style.display = 'none';
+    };
+    // MODAL DE TRANSFERENCIA BANCARIA
+    // Crear modal si no existe
+    if (!document.getElementById('modal-transferencia')) {
+        var modal = document.createElement('div');
+        modal.id = 'modal-transferencia';
+        modal.style.display = 'none';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.45)';
+        modal.style.zIndex = '4000';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.innerHTML = `
+        <div style="background:#fff; border-radius:12px; max-width:90vw; width:370px; padding:28px 22px 18px 22px; box-shadow:0 4px 32px #0003; position:relative; text-align:center; animation:modalIn .25s;">
+            <button id="cerrar-modal-transferencia" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:1.5rem; color:#FF5733; cursor:pointer;">&times;</button>
+            <h2 style="color:#FF5733; margin-bottom:10px;">Transferencia Bancaria</h2>
+            <p style="color:#333; font-size:1.08rem; margin-bottom:10px;">Realiza tu pago a la siguiente cuenta bancaria:</p>
+            <div style="background:#f7f7f7; border-radius:8px; padding:12px 10px; margin-bottom:14px; text-align:left; font-size:1rem;">
+                <b>Banco Popular</b><br>
+                Nombre: YAYA ORGANIC<br>
+                Cuenta: 123-456789-0<br>
+                Tipo: Ahorros<br>
+                <br>
+                <b>Banco BHD</b><br>
+                Nombre: YAYA ORGANIC<br>
+                Cuenta: 987-654321-0<br>
+                Tipo: Corriente
+            </div>
+            <p style="color:#666; font-size:0.98rem; margin-bottom:10px;">Adjunta el comprobante de tu transferencia antes de confirmar.</p>
+            <input type="file" id="voucher-input" accept="image/*,application/pdf" style="margin-bottom:10px;" />
+            <div id="voucher-nombre" style="font-size:0.95rem; color:#28a745; margin-bottom:8px;"></div>
+            <button id="confirmar-transferencia" style="background:#28a745; color:#fff; border:none; border-radius:6px; padding:12px 30px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px auto 0 auto; display:block;" disabled>Confirmar transferencia</button>
+        </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    var modalTransfer = document.getElementById('modal-transferencia');
+    // Habilitar botón solo si hay voucher
+    document.body.addEventListener('change', function(e) {
+        if (e.target && e.target.id === 'voucher-input') {
+            var file = e.target.files[0];
+            var btn = document.getElementById('confirmar-transferencia');
+            var nombreDiv = document.getElementById('voucher-nombre');
+            if (file) {
+                btn.disabled = false;
+                nombreDiv.textContent = 'Voucher cargado: ' + file.name;
+            } else {
+                btn.disabled = true;
+                nombreDiv.textContent = '';
+            }
+        }
+    });
+    // Mostrar modal al hacer clic en pago
+    document.getElementById('carrito-pago').onclick = function() {
+        if (carrito.length === 0) {
+            alert('El carrito está vacío.');
+            return;
+        }
+        document.getElementById('carrito-modal').style.display = 'none';
+        modalTransfer.style.display = 'flex';
+        // Resetear input y botón
+        var voucherInput = document.getElementById('voucher-input');
+        var nombreDiv = document.getElementById('voucher-nombre');
+        var btn = document.getElementById('confirmar-transferencia');
+        if (voucherInput) voucherInput.value = '';
+        if (nombreDiv) nombreDiv.textContent = '';
+        if (btn) btn.disabled = true;
+    };
+    // Cerrar modal transferencia
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'cerrar-modal-transferencia') {
+            modalTransfer.style.display = 'none';
+        }
+        if (e.target === modalTransfer) {
+            modalTransfer.style.display = 'none';
+        }
+    });
+    // Confirmar transferencia
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'confirmar-transferencia') {
+            var voucherInput = document.getElementById('voucher-input');
+            var voucherFile = voucherInput && voucherInput.files[0];
+            var voucherNombre = voucherFile ? voucherFile.name : '';
+            modalTransfer.style.display = 'none';
+            // Generar mensaje de WhatsApp con productos y total
+            var productosMsg = '';
+            var total = 0;
+            var productos = JSON.parse(localStorage.getItem('carrito_confirmado') || '[]');
+            if (!productos.length) {
+                productos = carrito.slice(); // fallback si no hay en localStorage
+            }
+            if (productos.length) {
+                productos.forEach(function(item, idx) {
+                    productosMsg += `• ${item.nombre} x${item.cantidad || 1} - RD$${(item.precio * (item.cantidad || 1)).toFixed(2)}%0A`;
+                    total += item.precio * (item.cantidad || 1);
+                });
+            }
+            var mensaje = `¡Hola! Adjunto comprobante de pago: ${voucherNombre ? voucherNombre : ''}%0A%0AProductos:%0A${productosMsg}%0ATotal pagado: RD$${total.toFixed(2)}%0A%0A*Por favor adjunta el voucher en esta conversación.*`;
+            var telefono = '18093948697'; // Cambia aquí si el número es otro
+            var url = `https://wa.me/${telefono}?text=${mensaje}`;
+            // Limpiar carrito y mostrar mensaje de éxito
+            carrito = [];
+            actualizarCarrito();
+            // Mensaje de éxito visual
+            var exito = document.createElement('div');
+            exito.textContent = '¡Transferencia confirmada! Ahora envía tu comprobante por WhatsApp.';
+            exito.style.position = 'fixed';
+            exito.style.top = '50%';
+            exito.style.left = '50%';
+            exito.style.transform = 'translate(-50%, -50%)';
+            exito.style.background = '#28a745';
+            exito.style.color = '#fff';
+            exito.style.padding = '22px 32px';
+            exito.style.borderRadius = '10px';
+            exito.style.fontSize = '1.15rem';
+            exito.style.zIndex = '5000';
+            exito.style.boxShadow = '0 4px 32px #0003';
+            document.body.appendChild(exito);
+            setTimeout(function(){
+                exito.remove();
+            }, 2200);
+            // Abrir WhatsApp con el mensaje
+            window.open(url, '_blank');
+        }
+    });
+    // Guardar carrito antes de confirmar transferencia
+    document.getElementById('carrito-pago').addEventListener('click', function() {
+        localStorage.setItem('carrito_confirmado', JSON.stringify(carrito));
+    });
     </script>
 </body>
 </html>
