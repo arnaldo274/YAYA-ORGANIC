@@ -21,7 +21,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FF5733;
+    background-color: #28a745;
     color: white;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -61,7 +61,7 @@ nav ul li a:hover {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #FF5733;
+    background-color: #28a745;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -89,7 +89,7 @@ nav ul li a:hover {
 
 /* Sección de Presentación */
 #presentacion {
-    background: linear-gradient(45deg, #FF5733, #FFEBCC);
+    background: linear-gradient(45deg, #28a745, #FFEBCC);
     padding: 100px 0;
     text-align: center;
 }
@@ -147,13 +147,13 @@ nav ul li a:hover {
 }
 
 .producto-card p {
-    color: #FF5733;
+    color: #28a745;
     font-weight: bold;
 }
 
 .producto-card button {
     padding: 10px;
-    background-color: #FF5733;
+    background-color: #28a745;
     color: white;
     border: none;
     cursor: pointer;
@@ -199,7 +199,7 @@ nav ul li a:hover {
 
 .carrito-modal h2 {
     margin-bottom: 20px;
-    color: #FF5733;
+    color: #28a745;
     text-align: center;
 }
 
@@ -229,7 +229,7 @@ nav ul li a:hover {
 }
 
 .carrito-modal ul button {
-    background: #FF5733;
+    background: #28a745;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -241,7 +241,7 @@ nav ul li a:hover {
 }
 
 .carrito-modal ul button:hover {
-    background: #e14a24;
+    background: #28a745;
 }
 
 .carrito-modal > button {
@@ -259,7 +259,7 @@ nav ul li a:hover {
 }
 
 .carrito-modal > button:hover {
-    background: #FF5733;
+    background: #28a745;
 }
 
 /* Formulario de registro bonito */
@@ -284,12 +284,12 @@ nav ul li a:hover {
 }
 
 #registro form input:focus {
-    border: 1.5px solid #FF5733;
+    border: 1.5px solid #28a745;
     outline: none;
 }
 
 #registro form button {
-    background: #FF5733;
+    background: #28a745;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -302,12 +302,12 @@ nav ul li a:hover {
 }
 
 #registro form button:hover {
-    background: #e14a24;
+    background: #28a745;
 }
 
 #registro h2 {
     text-align: center;
-    color: #FF5733;
+    color: #28a745;
     margin-top: 30px;
 }
 
@@ -333,12 +333,12 @@ nav ul li a:hover {
 }
 
 #login form input:focus {
-    border: 1.5px solid #FF5733;
+    border: 1.5px solid #28a745;
     outline: none;
 }
 
 #login form button {
-    background: #FF5733;
+    background: #28a745;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -351,12 +351,12 @@ nav ul li a:hover {
 }
 
 #login form button:hover {
-    background: #e14a24;
+    background: #28a745;
 }
 
 #login h2 {
     text-align: center;
-    color: #FF5733;
+    color: #28a745;
     margin-top: 30px;
 }
 
@@ -371,7 +371,7 @@ nav ul li a:hover {
         left: 0;
         right: 0;
         bottom: 0;
-        background: #FF5733;
+        background: #28a745;
         z-index: 10001;
         box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
     }
@@ -405,7 +405,7 @@ nav ul li a:hover {
         bottom: 45px;
         left: 50%;
         transform: translateX(-50%);
-        background: #ff6f3c;
+        background: #28a745;
         border-radius: 10px 10px 0 0;
         box-shadow: 0 -2px 8px rgba(0,0,0,0.10);
         min-width: 120px;
@@ -423,7 +423,7 @@ nav ul li a:hover {
         font-size: 1rem;
     }
     .nav-inferior .categorias-dropdown a:hover {
-        background: #FF5733;
+        background: #28a745;
     }
 }
 
@@ -541,7 +541,7 @@ nav ul li a:hover {
     position: fixed;
     bottom: 100px;
     right: 32px;
-    background: #FF5733;
+    background: #28a745;
     color: #fff;
     padding: 18px 32px;
     border-radius: 32px;
