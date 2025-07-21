@@ -422,20 +422,27 @@
       border-color: #a8e063;
     }
     .producto-card img {
-      width: 130px;
-      height: 130px;
+      width: 140px;
+      height: 140px;
       border-radius: 12px;
       margin-bottom: 10px;
       object-fit: cover;
+      aspect-ratio: 1/1;
+      background: #f7ffe5;
+      box-shadow: 0 2px 12px #b6e2c633;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     @media (max-width: 768px) {
-  .producto-card img {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-  }
-}
+      .producto-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        aspect-ratio: 1/1;
+      }
+    }
     .producto-card h3 {
       color: #388e3c;
       font-size: 1.18rem;
@@ -1107,7 +1114,7 @@
 
     <!-- Modal flotante para detalles de producto -->
     <div id="modal-detalles" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); z-index:3000; align-items:center; justify-content:center;">
-        <div style="background:#fff; border-radius:12px; max-width:90vw; width:350px; padding:28px 22px 18px 22px; box-shadow:0 4px 32px #0003; position:relative; text-align:center; animation:modalIn .25s;">
+        <div style="background:#fff; border-radius:16px; max-width:99vw; width:600px; max-height:88vh; min-height:320px; padding:32px 36px 26px 36px; box-shadow:0 8px 38px #0003; position:relative; text-align:center; animation:modalIn .25s; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#28a745 #e6f9f0;">
             <button id="cerrar-modal-detalles" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:1.5rem; color:#28a745; cursor:pointer;">&times;</button>
             <h2 id="modal-detalles-nombre" style="color:#28a745; margin-bottom:10px;"></h2>
             <p id="modal-detalles-resumen" style="color:#333; font-size:1.08rem; margin-bottom:10px;"></p>
@@ -1118,7 +1125,7 @@
     // Mostrar modal de detalles de producto
     function mostrarDetallesProducto(nombre, descripcion, resumen, precio, categoria, imagen) {
         document.getElementById('modal-detalles-nombre').innerHTML = nombre;
-        document.getElementById('modal-detalles-resumen').innerHTML = `<img src='${imagen}' alt='${nombre}' style='max-width:100%;border-radius:12px;margin-bottom:12px;'><br><b>Nombre:</b> ${nombre}<br><b>Categoría:</b> ${categoria}<br><b>Precio:</b> ${precio}<br>${resumen ? `<b>Resumen:</b> ${resumen}<br>` : ''}`;
+        document.getElementById('modal-detalles-resumen').innerHTML = `<img src='${imagen}' alt='${nombre}' style='max-width:180px;max-height:180px;width:auto;height:auto;border-radius:12px;margin-bottom:14px;box-shadow:0 2px 14px #b6e2c633;'><br><b>Nombre:</b> ${nombre}<br><b>Categoría:</b> ${categoria}<br><b>Precio:</b> ${precio}<br>${resumen ? `<b>Resumen:</b> ${resumen}<br>` : ''}`;
         document.getElementById('modal-detalles-descripcion').innerHTML = `<b>Descripción:</b> ${descripcion}`;
         document.getElementById('modal-detalles').style.display = 'flex';
     }
@@ -1127,24 +1134,52 @@
         document.getElementById('modal-detalles').style.display = 'none';
     }
     // Asignar eventos a los botones de detalles
-    setTimeout(function() {
-        document.querySelectorAll('.btn-detalles').forEach(function(btn){
-            btn.addEventListener('click', function(){
+
+setTimeout(function() {
+    // Botón Detalles: listeners limpios
+    document.querySelectorAll('.btn-detalles').forEach(function(btn){
+        btn.replaceWith(btn.cloneNode(true));
+    });
+    document.querySelectorAll('.btn-detalles').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            var card = btn.closest('.producto-card');
+            var nombre = card.getAttribute('data-nombre') || (card.querySelector('h3') ? card.querySelector('h3').textContent : '');
+            var descripcion = card.getAttribute('data-descripcion') || (card.querySelector('p') ? card.querySelector('p').textContent : 'Sin descripción.');
+            var resumen = card.getAttribute('data-resumen') || '';
+            var precio = card.querySelector('p') ? card.querySelector('p').textContent : '';
+            var categoria = card.getAttribute('data-categoria') || '';
+            var imagen = card.querySelector('img') ? card.querySelector('img').src : '';
+            mostrarDetallesProducto(nombre, descripcion, resumen, precio, categoria, imagen);
+        });
+    });
+    document.getElementById('cerrar-modal-detalles').onclick = cerrarModalDetalles;
+    document.getElementById('modal-detalles').addEventListener('click', function(e){
+        if(e.target === this) cerrarModalDetalles();
+    });
+
+    // Botón Agregar al Carrito: listeners limpios y robustos
+    document.querySelectorAll('.producto-botones button').forEach(function(btn){
+        // Si el botón es de agregar al carrito
+        if(btn.textContent.trim().toLowerCase().includes('agregar al carrito')) {
+            btn.replaceWith(btn.cloneNode(true));
+        }
+    });
+    document.querySelectorAll('.producto-botones button').forEach(function(btn){
+        if(btn.textContent.trim().toLowerCase().includes('agregar al carrito')) {
+            btn.addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
                 var card = btn.closest('.producto-card');
                 var nombre = card.getAttribute('data-nombre') || (card.querySelector('h3') ? card.querySelector('h3').textContent : '');
-                var descripcion = card.getAttribute('data-descripcion') || (card.querySelector('p') ? card.querySelector('p').textContent : 'Sin descripción.');
-                var resumen = card.getAttribute('data-resumen') || '';
-                var precio = card.querySelector('p') ? card.querySelector('p').textContent : '';
-                var categoria = card.getAttribute('data-categoria') || '';
-                var imagen = card.querySelector('img') ? card.querySelector('img').src : '';
-                mostrarDetallesProducto(nombre, descripcion, resumen, precio, categoria, imagen);
+                var precioTexto = card.querySelector('p') ? card.querySelector('p').textContent : '';
+                var precio = parseFloat(precioTexto.replace(/[^\d.]/g, '')) || 0;
+                var producto = { nombre: nombre, precio: precio };
+                agregarAlCarrito(producto);
             });
-        });
-        document.getElementById('cerrar-modal-detalles').onclick = cerrarModalDetalles;
-        document.getElementById('modal-detalles').addEventListener('click', function(e){
-            if(e.target === this) cerrarModalDetalles();
-        });
-    }, 100);
+            btn.removeAttribute('onclick');
+        }
+    });
+}, 100);
     // Mostrar modal de pago contra entrega
     document.getElementById('carrito-pago-entrega').onclick = function() {
       document.getElementById('modal-entrega').style.display = 'flex';
@@ -1395,7 +1430,7 @@
             exito.style.color = '#fff';
             exito.style.padding = '22px 32px';
             exito.style.borderRadius = '10px';
-            exito.style fontSize = '1.15rem';
+            exito.style.fontSize = '1.15rem';
             exito.style.zIndex = '5000';
             exito.style.boxShadow = '0 4px 32px #0003';
             document.body.appendChild(exito);
@@ -1418,6 +1453,23 @@
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('carrito-modal');
   if(modal) modal.style.display = 'none';
+});
+</script>
+<script>
+// Delegación de eventos para todos los botones 'Agregar al Carrito'
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.producto-botones').forEach(function(contenedor) {
+    contenedor.addEventListener('click', function(e) {
+      if (e.target && e.target.tagName === 'BUTTON' && e.target.textContent.trim().toLowerCase().includes('agregar')) {
+        var card = e.target.closest('.producto-card');
+        if (card) {
+          var nombre = card.getAttribute('data-nombre') || (card.querySelector('h3') ? card.querySelector('h3').textContent : '');
+          var precio = card.querySelector('p') ? parseFloat(card.querySelector('p').textContent.replace(/[^\d.]/g, '')) : 0;
+          agregarAlCarrito({ nombre: nombre, precio: precio });
+        }
+      }
+    });
+  });
 });
 </script>
 </body>
